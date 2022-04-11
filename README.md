@@ -155,7 +155,7 @@ npm start
 
 <br />
 
-🫠 &nbsp; 어려웠던 점
+😀 &nbsp; 어려웠던 점
 
 1. useLocalStorage(hooks)와 Redux
 
