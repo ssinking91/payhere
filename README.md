@@ -161,7 +161,7 @@ npm start
 
 <br />
 
-### 3. React props 디버깅
+### 4. React props 디버깅
 
 > 1. React는 내장된 타입 검사 기능인 propTypes를 사용하여 컴포넌트의 props에 타입 검사를 한 후 버그를(bug) 쉽게 확인 하였습니다.. propTypes는 성능상의 이유로 개발 모드(Development mode) 에서만 확인 가능 합니다.
 
