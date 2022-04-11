@@ -137,7 +137,7 @@ npm start
 <br/>
 
 <div align="center">
-    <img width="500px" height="300px" src="https://user-images.githubusercontent.com/89959952/162684248-b56c35a1-ddce-4a13-8eeb-214eb06fa246.gif"/>
+    <img width="500px" height="300px" src="https://user-images.githubusercontent.com/89959952/162816413-edd09e3b-6c58-4028-b7e7-dbc81880f31b.gif"/>
 </div>
 
 <br/>
