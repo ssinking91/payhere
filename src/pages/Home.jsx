@@ -65,7 +65,27 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     min-width: 450px;
+    height: 100%;
+    gap: 5rem;
   }
+`;
+
+const LeftBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  min-width: 450px;
+  height: 100%;
+  @media screen and (max-width: 950px) {
+    justify-content: space-between;
+    width: 70%;
+    height: 65vh;
+  }
+`;
+
+const SearchBox = styled.div`
+  width: 100%;
+  height: auto;
 `;
 
 const HomeTitle = styled.div`
@@ -74,26 +94,6 @@ const HomeTitle = styled.div`
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 4rem;
-  @media screen and (max-width: 950px) {
-    margin-bottom: 2rem;
-  }
-`;
-
-const LeftBox = styled.div`
-  width: 50%;
-  min-width: 450px;
-  height: 70%;
-  @media screen and (max-width: 950px) {
-    height: 70%;
-  }
-`;
-
-const SearchBox = styled.div`
-  width: 100%;
-  height: auto;
-  @media screen and (max-width: 950px) {
-    height: 30%;
-  }
 `;
 
 const SearchListBox = styled.div`
@@ -112,6 +112,7 @@ const RightBox = styled.div`
   width: 50%;
   min-width: 450px;
   @media screen and (max-width: 950px) {
-    height: 30%;
+    width: 70%;
+    height: auto;
   }
 `;

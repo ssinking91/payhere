@@ -71,7 +71,6 @@ export default function SearchList() {
             {InfiniteScrollList.map((list, idx) => {
               return (
                 <ListBox
-                  // key={list.userID}
                   key={idx}
                   idx={idx}
                   button={'Add'}
