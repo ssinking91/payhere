@@ -57,7 +57,7 @@
 ```jsx
 git clone https://github.com/ssinking91/payhere.git
 
-cd
+cd payhere
 
 npm install
 
