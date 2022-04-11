@@ -46,43 +46,36 @@ export default handleActions(
   {
     [FOUR_MODAL]: (state, action) =>
       produce(state, (draft) => {
-        console.log('FOUR_MODAL');
         draft.fourModal = !state.fourModal;
       }),
 
     [ALREADY_MODAL]: (state, action) =>
       produce(state, (draft) => {
-        console.log('ALREADY_MODAL');
         draft.alreadyModal = !state.alreadyModal;
       }),
 
     [ADD_SEARCH_REPO]: (state, action) =>
       produce(state, (draft) => {
-        console.log('ADD_SEARCH_REPO');
         draft.addRepo = [...state.addRepo, action.payload.addData];
       }),
 
     [DELETE_REPO]: (state, action) =>
       produce(state, (draft) => {
-        console.log('DELETE_REPO');
         draft.addRepo = action.payload.deletedData;
       }),
 
     [COUNT_SCROLL]: (state, action) =>
       produce(state, (draft) => {
-        console.log('COUNT_SCROLL');
         draft.countScroll = state.countScroll + 1;
       }),
 
     [GET_SEARCH_TEXT]: (state, action) =>
       produce(state, (draft) => {
-        console.log('GET_SEARCH_TEXT');
         draft.searchText = action.payload.searchText;
       }),
 
     [ADD_SEARCH_LIST]: (state, action) =>
       produce(state, (draft) => {
-        console.log('ADD_SEARCH_LIST');
         draft.searchList = [...action.payload.list];
       }),
   },

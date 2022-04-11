@@ -36,7 +36,6 @@ export default function SearchList() {
 
   const handleAddRepo = useCallback(
     (e, RepoOne) => {
-      console.log(e.target);
       const addOneRepo = getSearchList.filter(
         (listOne) =>
           listOne.userID === getSearchList[e.target.id].userID &&

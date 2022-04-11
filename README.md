@@ -1,63 +1,5 @@
 <br />
 
-### ✨ [페이히어] 프론트엔드 엔지니어 과제 - 신항민
-
----
-
-<br />
-
-### 💫  프로젝트 소개
-
-- GitHub의 Public Repository를 검색한 후 Issue들을 모아 놓은 페이지 구현
-
-<br />
-
-### ⚙️  프로젝트 기획
-
-1. 코드 재사용성 및 컴포넌트화를 고려
-2. 렌더링 최적화를 고려
-3. UI/UX를 고려
-
-<br />
-
-### 👀  요구사항
-
-1. Repository명을 입력해서 Repository를 검색할 수 있다.
-2. 검색된 Public Repository를 등록할 수 있다.
-
-   - 등록 개수는 최대 4개로 제한하며, 최대 개수 초과 등록 시 이를 사용자에게 알려준다.
-
-   - LocalStorage로 데이터 저장
-
-3. 등록된 Repository를 삭제할 수 있다.
-4. 등록된 각각의 Public Repository의 issue를 한 페이지에서 모아서 볼 수 있다.
-   - 각 issue 마다 제목, Repository 명은 필수로 표현되어야 한다. 그 이외의 데이터 중 필요하다고 생각되는 부분은 추가한다.
-   - 해당 issue를 클릭하면 Github의 상세 페이지로 이동할 수 있다.
-   - 페이지네이션을 통해서 계속해서 issue를 모아서 볼 수 있다.
-
-<br />
-
-### 🔨  실행방법 - 1
-
-1. Github Repository를 검색할 수 있는 검색창에 Repository를 입력해 주세요.
-2. Saved Repositories 중 보고 싶은 Repository 클릭해 주세요.
-3. 모아놓은 Issue들 중 하나를 클릭하면 해당 사이트로 이동합니다.
-   <br />
-
-### 🔧  실행방법 - 2
-
-```jsx
-git clone https://github.com/ssinking91/payhere.git
-
-cd
-
-npm install
-
-npm start
-```
-
-<br />
-
 ### 👨🏻‍💻 기능 구현 목록
 
 <br>
@@ -128,6 +70,10 @@ npm start
 
 ### 3. UI/UX를 고려
 
+<br/>
+
+<br/>
+
 > 1. 전체적인 컴포넌트 생성 시 width값을 % 로 설정해 가로 사이즈가 줄어들때 자동으로 크기를 가져가도록 설정, 미디어 쿼리를 사용해 특정 컴포넌트 크기 및 색상 노출 여부를 컨트롤 하였고, 모바일 사이즈가 되었을 때 모바일 전용 제공 하였습니다.
 
 - /src/pages/Home.jsx
@@ -155,7 +101,7 @@ npm start
 
 <br />
 
-🫠 &nbsp; 어려웠던 점
+😀 &nbsp; 어려웠던 점
 
 1. useLocalStorage(hooks)와 Redux
 
