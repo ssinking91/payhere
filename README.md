@@ -20,6 +20,14 @@
 
 <br />
 
+### 🛠 기능 시연 
+
+<div align="center">
+    <img width="500px" height="300px" src="https://user-images.githubusercontent.com/89959952/162679382-03cbc451-9e28-44cd-8bac-e477d5081e39.gif"/>
+</div>
+
+<br />
+
 ### 👀  요구사항
 
 1. Repository명을 입력해서 Repository를 검색할 수 있다.
@@ -127,6 +135,14 @@ npm start
 <br />
 
 ### 3. UI/UX를 고려
+
+<br/>
+
+<div align="center">
+    <img width="500px" height="300px" src="https://user-images.githubusercontent.com/89959952/162684248-b56c35a1-ddce-4a13-8eeb-214eb06fa246.gif"/>
+</div>
+
+<br/>
 
 > 1. 전체적인 컴포넌트 생성 시 width값을 % 로 설정해 가로 사이즈가 줄어들때 자동으로 크기를 가져가도록 설정, 미디어 쿼리를 사용해 특정 컴포넌트 크기 및 색상 노출 여부를 컨트롤 하였고, 모바일 사이즈가 되었을 때 모바일 전용 제공 하였습니다.
 
