@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 
 //React.memo(): 컴포넌트의 props 가 바뀌지 않았다면, 리렌더링을 방지하여 컴포넌트의 리렌더링 성능 최적화
 function Pagination({ currentPage, numOfPages, changePageNum }) {
+  const prevRef = useRef();
+  const nextRef = useRef();
+
+  // 페이지 인덱스 배열
   const [pageIndexArray, setPageIndexArray] = useState(
     Array.from({ length: numOfPages }, (_, idx) => idx + 1),
   );
-
-  const prevRef = useRef();
-  const nextRef = useRef();
 
   useEffect(() => {
     setPageIndexArray(Array.from({ length: numOfPages }, (_, idx) => idx + 1));
@@ -30,6 +31,7 @@ function Pagination({ currentPage, numOfPages, changePageNum }) {
     }
   }, [currentPage, pageIndexArray]);
 
+  // 페이지 인덱스 변경
   const handlePageNum = useCallback(
     (e) => {
       if (e.target.textContent === 'prev') {

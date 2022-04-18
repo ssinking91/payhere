@@ -18,6 +18,7 @@ export default function Issue() {
   const [isLoading, setIsLoading] = useState(false);
   // issueData =[{...}, ...]
   const [issueData, setIssueData] = useState([]);
+
   // Pagination Current Page
   const [currentPage, setCurrentPage] = useState(1);
   // Post 6 per page
@@ -25,10 +26,12 @@ export default function Issue() {
   // Number of Pages
   const [numOfPages, setNumOfPages] = useState(0);
 
+  // All / Open / Closed
   const [clickedText, setClickedText] = useState('All');
 
   const { userID, repoName } = useGetQs('userID', 'repoName');
 
+  // Api 호출
   useEffect(() => {
     const url = `https://api.github.com/repos/${userID}/${repoName}/issues?state=all&&per_page=100`;
     (async () => {
@@ -38,9 +41,9 @@ export default function Issue() {
         const { data, status, statusText } = await axios.get(url, headers);
 
         if (status >= 400) {
-          alert(`잘못된 요청입니다. statusText: ${statusText}`);
+          alert(`잘못된 요청입니다.🤢 statusText: ${statusText}`);
         } else if (status >= 500) {
-          alert(`서버 에러입니다. statusText: ${statusText}`);
+          alert(`서버 에러입니다.🤢 statusText: ${statusText}`);
         }
 
         if (data.length) {
@@ -70,6 +73,7 @@ export default function Issue() {
         }
         setIsLoading(false);
       } catch (e) {
+        alert(`에러가 발생했습니다.🤢 잠시후 다시 실행해 주세요. `);
         console.error(e);
         setIsLoading(false);
       }
@@ -78,6 +82,7 @@ export default function Issue() {
 
   useEffect(() => {
     const len = issueData.length;
+
     // Number of Pages
     const pagesLength = Math.ceil(len / postsPerPage);
 
@@ -92,22 +97,25 @@ export default function Issue() {
     setCurrentPage(newIndex);
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const chageTextData = (text) => {
-    const newDatas = datas.filter((obj) => {
-      switch (text) {
-        case 'All':
-          return obj;
-        case 'Open':
-          return obj.state === 'open';
-        case 'Closed':
-          return obj.state === 'closed';
-        default:
-          throw new Error(`Invalid text : ${text}`);
-      }
-    });
-    setIssueData(newDatas);
-  };
+  // ['All', 'Open', 'Closed'] 변경 함수
+  const chageTextData = useCallback(
+    (text) => {
+      const newDatas = datas.filter((obj) => {
+        switch (text) {
+          case 'All':
+            return obj;
+          case 'Open':
+            return obj.state === 'open';
+          case 'Closed':
+            return obj.state === 'closed';
+          default:
+            throw new Error(`Invalid text : ${text}`);
+        }
+      });
+      setIssueData(newDatas);
+    },
+    [datas],
+  );
 
   // ['All', 'Open', 'Closed'] 클릭 이벤트
   const handleClickText = useCallback(
@@ -146,7 +154,7 @@ export default function Issue() {
             issueData
               .slice(
                 postsPerPage * (currentPage - 1),
-                postsPerPage * currentPage - 1 + 1,
+                postsPerPage * currentPage,
               )
               .map((dataObj) => (
                 <IssueItem key={dataObj.number} dataObj={dataObj} />

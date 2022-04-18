@@ -32,12 +32,10 @@ const initialState = {
   fourModal: false,
   alreadyModal: false,
 
-  repoData: [],
-  compareData: [],
-  addRepo: [],
+  Repos: [],
 
-  countScroll: 2,
   searchText: '',
+  countScroll: 2,
   searchList: [],
 };
 
@@ -56,12 +54,12 @@ export default handleActions(
 
     [ADD_SEARCH_REPO]: (state, action) =>
       produce(state, (draft) => {
-        draft.addRepo = [...state.addRepo, action.payload.addData];
+        draft.Repos = [...state.Repos, action.payload.addData];
       }),
 
     [DELETE_REPO]: (state, action) =>
       produce(state, (draft) => {
-        draft.addRepo = action.payload.deletedData;
+        draft.Repos = action.payload.deletedData;
       }),
 
     [COUNT_SCROLL]: (state, action) =>

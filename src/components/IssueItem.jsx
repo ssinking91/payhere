@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { returnGapDate } from '../util/date';
 export default function IssueItem({ dataObj }) {
   const {
     title,
@@ -12,21 +13,14 @@ export default function IssueItem({ dataObj }) {
     user: { avatar_url },
   } = dataObj;
 
-  const getDate = () => {
-    const createdDate = new Date(created_at);
-    const currDate = new Date();
-    const yDiff = currDate.getFullYear() - createdDate.getFullYear();
-    const mDiff = currDate.getMonth() - createdDate.getMonth();
-    const dDiff = currDate.getDate() - createdDate.getDate();
-    const date = parseInt((yDiff * 365 + mDiff * 30 + dDiff) / 30);
-    return date ? date + 'month' : dDiff + ' day';
-  };
+  const currDate = new Date();
+  const createdDate = new Date(created_at);
 
   return (
     <Container state={state} url={html_url}>
       <Title>{title}</Title>
       <RepoName>{repository_url}</RepoName>
-      <RegistDate> {getDate()} ago</RegistDate>
+      <RegistDate> {returnGapDate(currDate, createdDate)} ago</RegistDate>
       <State>{state}</State>
       <ProfileImg avatar_url={avatar_url} />
     </Container>

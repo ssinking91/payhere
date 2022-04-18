@@ -17,21 +17,22 @@ import ListBox from '../components/ListBox';
 export default function SearchList() {
   const dispatch = useDispatch();
 
-  const targetRef = useRef(null);
-
   const getSearchList = useSelector((state) => state.HomeIssue.searchList);
-  const addRepos = useSelector((state) => state.HomeIssue.addRepo);
+  const Repos = useSelector((state) => state.HomeIssue.Repos);
+
+  // intersection Observer ref역활을 담당하는 target 설정
+  const targetRef = useRef(null);
 
   const [savedRepo, setSaveRepo] = useLocalStorage('savedRepo', []);
 
-  const setScrollRepo = (data) => {
+  const addScrollList = (data) => {
     dispatch(addSearchList(data));
   };
 
   const [InfiniteScrollList, isLoding] = useIntersect(
     targetRef,
     getSearchList,
-    setScrollRepo,
+    addScrollList,
   );
 
   const handleAddRepo = useCallback(
@@ -42,15 +43,15 @@ export default function SearchList() {
           listOne.repoName === getSearchList[e.target.id].repoName,
       );
 
-      if (addRepos.length < 4) {
-        if (addRepos.length > 0) {
-          const newRepos = addRepos.map((el) => `${el.userID}${el.repoName}`);
+      if (Repos.length < 4) {
+        if (Repos.length > 0) {
+          const newRepos = Repos.map((el) => `${el.userID}${el.repoName}`);
 
           if (newRepos.includes(`${RepoOne.userID}${RepoOne.repoName}`)) {
             dispatch(setAlreadyModal());
           } else {
             dispatch(addSearchRepo(addOneRepo[0]));
-            setSaveRepo([...addRepos, addOneRepo[0]]);
+            setSaveRepo([...Repos, addOneRepo[0]]);
           }
         } else {
           dispatch(addSearchRepo(addOneRepo[0]));
@@ -60,7 +61,7 @@ export default function SearchList() {
         dispatch(setFourModal());
       }
     },
-    [addRepos, dispatch, getSearchList, setSaveRepo],
+    [Repos, dispatch, getSearchList, setSaveRepo],
   );
 
   return (

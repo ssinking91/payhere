@@ -12,6 +12,7 @@ export default function SearchBar({ setIsLoading, isLoading }) {
 
   const searchInput = useRef(null);
 
+  // Api 호출
   const handleInput = useCallback(
     async (e) => {
       const targetValue = searchInput.current.value;
@@ -25,9 +26,9 @@ export default function SearchBar({ setIsLoading, isLoading }) {
           const { data, status, statusText } = await axios.get(url, headers);
 
           if (status >= 400) {
-            alert(`잘못된 요청입니다. statusText: ${statusText}`);
+            alert(`잘못된 요청입니다.🤢 statusText: ${statusText}`);
           } else if (status >= 500) {
-            alert(`서버 에러입니다. statusText: ${statusText}`);
+            alert(`서버 에러입니다.🤢 statusText: ${statusText}`);
           }
 
           const result = data.items.map((item) => {
@@ -39,7 +40,7 @@ export default function SearchBar({ setIsLoading, isLoading }) {
           dispatch(getSearchText(targetValue));
           setIsLoading(false);
         } catch (e) {
-          alert(`에러가 발생했습니다. 잠시후 다시 실행해 주세요. `);
+          alert(`에러가 발생했습니다.🤢 잠시후 다시 실행해 주세요. `);
           console.error(e);
           setIsLoading(false);
         }
@@ -50,6 +51,7 @@ export default function SearchBar({ setIsLoading, isLoading }) {
 
   return (
     <Input
+      type="text"
       ref={searchInput}
       onKeyPress={handleInput}
       placeholder="Github Repository를 검색해주세요.✨"

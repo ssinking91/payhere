@@ -5,7 +5,7 @@ import axios from 'axios';
 import { countScroll } from '../redux/modules/HomeIssue';
 import { headers } from '../util/util';
 
-const useIntersect = (targetRef, getSearchList, setScrollRepo) => {
+const useIntersect = (targetRef, getSearchList, addScrollList) => {
   const dispatch = useDispatch();
 
   const searchText = useSelector((state) => state.HomeIssue.searchText);
@@ -14,35 +14,38 @@ const useIntersect = (targetRef, getSearchList, setScrollRepo) => {
   const [showList, setShowList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getDataApi = (target, page) => {
-    const url = `https://api.github.com/search/repositories?q=${target}&per_page=20&page=${page}`;
-    (async () => {
-      try {
-        setIsLoading(true);
+  // Api 호출
+  const getDataApi = useCallback(
+    (target, page) => {
+      const url = `https://api.github.com/search/repositories?q=${target}&per_page=20&page=${page}`;
+      (async () => {
+        try {
+          setIsLoading(true);
 
-        const { data, status, statusText } = await axios.get(url, headers);
+          const { data, status, statusText } = await axios.get(url, headers);
 
-        if (status >= 400) {
-          alert(`잘못된 요청입니다. statusText: ${statusText}`);
-        } else if (status >= 500) {
-          alert(`서버 에러입니다. statusText: ${statusText}`);
+          if (status >= 400) {
+            alert(`잘못된 요청입니다. statusText: ${statusText}`);
+          } else if (status >= 500) {
+            alert(`서버 에러입니다. statusText: ${statusText}`);
+          }
+
+          const result = data.items.map((item) => {
+            const fullName = item.full_name.split('/');
+            return { userID: fullName[0], repoName: fullName[1] };
+          });
+
+          addScrollList([...getSearchList, ...result]);
+          dispatch(countScroll());
+          setIsLoading(false);
+        } catch (e) {
+          console.error(e);
+          setIsLoading(false);
         }
-
-        const result = data.items.map((item) => {
-          const fullName = item.full_name.split('/');
-          return { userID: fullName[0], repoName: fullName[1] };
-        });
-
-        setScrollRepo([...getSearchList, ...result]);
-        dispatch(countScroll());
-        setIsLoading(false);
-      } catch (e) {
-        console.error(e);
-        setIsLoading(false);
-      }
-    })();
-  };
+      })();
+    },
+    [addScrollList, dispatch, getSearchList],
+  );
 
   // IntersectionObserver callback 함수
   const callback = useCallback(
@@ -60,6 +63,7 @@ const useIntersect = (targetRef, getSearchList, setScrollRepo) => {
 
   // Infinite Scroll
   useEffect(() => {
+    // 초기 리스트 로딩
     if (Array.isArray(getSearchList)) {
       setShowList(getSearchList);
     }

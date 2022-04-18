@@ -10,7 +10,8 @@ export default function RepoList() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const addRepos = useSelector((state) => state.HomeIssue.addRepo);
+
+  const Repos = useSelector((state) => state.HomeIssue.Repos);
 
   const [savedRepo, setSaveRepo] = useLocalStorage('savedRepo', []);
 
@@ -24,28 +25,28 @@ export default function RepoList() {
     (e) => {
       e.stopPropagation();
       const target = e.target.id;
-      let leftData = addRepos.filter((_, idx) => Number(target) !== idx);
+      let leftData = Repos.filter((_, idx) => Number(target) !== idx);
       dispatch(deleteRepo(leftData));
       setSaveRepo(leftData);
     },
-    [addRepos, dispatch, setSaveRepo],
+    [Repos, dispatch, setSaveRepo],
   );
 
   const handleIssueNavigate = useCallback(
     (idx) => {
       const target = Number(idx);
-      const issueData = addRepos[target];
+      const issueData = Repos[target];
       navigate(
         `/issue?userID=${issueData.userID}&repoName=${issueData.repoName}`,
       );
     },
-    [addRepos, navigate],
+    [Repos, navigate],
   );
 
   return (
     <>
-      {addRepos &&
-        addRepos.map((repo, idx) => {
+      {Repos &&
+        Repos.map((repo, idx) => {
           return (
             <ListBox
               key={idx}
